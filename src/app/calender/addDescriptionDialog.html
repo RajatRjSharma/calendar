@@ -1,0 +1,29 @@
+<form [formGroup]="addDescForm">
+  <h1 mat-dialog-title>Add Description</h1>
+  <div mat-dialog-content>
+    <div>Time Slot: {{data.time | date:'medium'}}</div>
+    <mat-form-field class="example-full-width">
+      <mat-label>Description :</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+      <mat-error
+        *ngIf="addDescForm.get('description')?.invalid && (addDescForm.get('description')?.dirty || addDescForm.get('description')?.touched)"
+        style="color: rgb(241, 69, 69); font-size: 12px"
+      >
+        {{(addDescForm.get('description')?.errors?.['required']) ? "Description
+        Required !!!" : "Description is not of valid format !!!"}}
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions align="end">
+    <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="addDescForm.invalid"
+      (click)="onAdd()"
+    >
+      {{data?.item? 'Update' : 'Add'}}
+    </button>
+  </div>
+</form>

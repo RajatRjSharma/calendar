@@ -1,0 +1,90 @@
+<div class="w-full">
+  <div class="h-12 w-full border-b-[1px] flex items-center align-middle">
+    <span class="ml-6 font-medium text-2xl">Calendar</span>
+    <span class="ml-[120px] test-xl">{{ selected | date }}</span>
+  </div>
+  <div class="h-full w-full flex">
+    <div class="border-r-[1px] w-[300px]" [style.height]="height">
+      <mat-calendar
+        [(selected)]="selected"
+        (selectedChange)="runRandomQuoteApi()"
+      ></mat-calendar>
+      <div class="flex flex-col m-3">
+        <h4>A quote for a day:</h4>
+        <span>{{ loading ? "Loading...." : this.quote }}</span>
+      </div>
+      <!-- <button mat-raised-button color="primary" routerLink="quote" class="m-3">
+        Go to Quote Page
+      </button> -->
+    </div>
+    <div class="w-full overflow-auto flex" [style.height]="height">
+      <div class="flex flex-col w-10 h-full">
+        <div
+          class="flex h-14 w-10"
+          *ngFor="let item of timeList; let i = index"
+        >
+          <div class="w-10 relative h-14">
+            <span class="absolute bottom-[-7px] text-[10px] right-1">{{
+              item
+            }}</span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="flex flex-col w-full h-full"
+        cdkDropList
+        (cdkDropListDropped)="drop($event)"
+      >
+        <button
+          class="flex min-w-full min-h-14 border-b-[1px] border-l-[1px] hover:bg-slate-200"
+          *ngFor="let item of timeList; let i = index"
+          (click)="
+            !(
+              descriptionRecord.hasOwnProperty(selected.toDateString()) &&
+              descriptionRecord[selected.toDateString()].hasOwnProperty(i)
+            ) && openDialog(i)
+          "
+          cdkDrag
+          [cdkDragDisabled]="
+            !(
+              descriptionRecord.hasOwnProperty(selected.toDateString()) &&
+              descriptionRecord[selected.toDateString()].hasOwnProperty(i)
+            )
+          "
+        >
+          <div
+            *ngIf="
+              descriptionRecord.hasOwnProperty(selected.toDateString()) &&
+              descriptionRecord[selected.toDateString()].hasOwnProperty(i)
+            "
+            class="bg-slate-400 flex items-center align-middle m-1 border-b-[1px] rounded-md h-12 justify-between px-2 w-full"
+          >
+            <span class="ml-2">{{
+              descriptionRecord[selected.toDateString()][i]
+            }}</span>
+            <div class="flex gap-1">
+              <button
+                mat-mini-fab
+                color="primary"
+                (click)="editSlot(i, $event)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-mini-fab color="warn" (click)="deleteSlot(i, $event)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div
+            *cdkDragPreview
+            class="bg-slate-400 flex items-center align-middle m-1 border-b-[1px] rounded-md h-12 justify-between px-2 w-[70%]"
+          >
+            <span class="ml-2">{{
+              descriptionRecord[selected.toDateString()][i]
+            }}</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

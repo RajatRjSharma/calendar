@@ -1,0 +1,19 @@
+<div class="h-[90vh] w-full flex justify-center align-middle items-center">
+  <div class="h-[200px] w-[200px] flex flex-col m-3">
+    <h4>A quote for a day:</h4>
+    <span>{{ loading ? "Loading....." : quote }}</span>
+    <div class="flex gap-1 justify-between">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="runRandomQuoteApi()"
+        class="mt-2"
+      >
+        New
+      </button>
+      <button mat-raised-button color="accent" routerLink="" class="mt-2">
+        Calender
+      </button>
+    </div>
+  </div>
+</div>
