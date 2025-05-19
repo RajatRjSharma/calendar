@@ -9,6 +9,6 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   public getRandomQuote(): Observable<any> {
-    return this.http.get(`https://api.quotable.io/random`);
+    return this.http.get(`https://dummyjson.com/quotes/random`);
   }
 }

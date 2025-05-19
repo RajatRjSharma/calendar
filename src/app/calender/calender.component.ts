@@ -165,7 +165,7 @@ export class CalenderComponent implements OnInit {
     this.loading = true;
     this.apiService.getRandomQuote().subscribe({
       next: (response) => {
-        this.quote = response?.content || '';
+        this.quote = response?.quote	 || '';
       },
       error: (error) => {
         console.error(error);
