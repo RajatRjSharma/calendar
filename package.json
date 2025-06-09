@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "buildAndDeploy": "ng build --output-path=dist/calendar --base-href=/calendar/ && npx ngh --dir=dist/calendar",
-    "buildAndDeploy_1": "ng build --output-path=dist/calendar_1 --base-href=/ && npx ngh --dir=dist/calendar_1"
+    "buildAndDeploy_1": "ng build --output-path=dist/calendar --base-href=/ && npx ngh --dir=dist/calendar"
   },
   "private": true,
   "dependencies": {
